@@ -19,7 +19,8 @@
      TouchableOpacity,
      Image,
      Alert,
-     FlatList
+     FlatList,
+     Linking,
  } from 'react-native';
  import {
      createStackNavigator,
@@ -50,7 +51,9 @@
          this.state = {
              name: '',
              password: "",
-             list: [1, 2, 3, 4]
+             list: [1, 2, 3, 4],
+             bgColor:'#F5FCFF',
+             
          }
      }
 
@@ -99,10 +102,52 @@
             }
         })
      }
+
+     changeToFirstBgcolor=()=>{
+        // 点击按钮call API返回一个字符串，设置为页面背景颜色1
+        return fetch('https://partsunlimited-api-vjyn4qb4solrw.azurewebsites.net/api/demo')
+          // .then((response) => response.json())
+          .then((result) => {
+            console.log("bgColor1="+JSON.stringify(result._bodyInit))
+            let bgColor1=JSON.stringify(result._bodyInit)
+            this.setState({
+              bgColor:bgColor1
+            }, function(){
+
+            });
+
+          })
+          .catch((error) =>{
+            console.error(error);
+          });
+         // Linking.openURL("https://partsunlimited-api-vjyn4qb4solrw.azurewebsites.net/api/demo")
+     }
+
+
+     changeToSecondBgcolor=()=>{
+        // 点击按钮call API返回一个字符串，设置为页面背景颜色2
+        return fetch('https://partsunlimited-api-cf3oys6viwkao.azurewebsites.net/api/demo')
+          // .then((response) => response.json())
+          .then((result) => {
+
+            console.log("bgColor2="+JSON.stringify(result._bodyInit))
+            let bgColor2=JSON.stringify(result._bodyInit)
+            this.setState({
+              bgColor:bgColor2
+            }, function(){
+
+            });
+
+          })
+          .catch((error) =>{
+            console.error(error);
+          });
+     }
      render() {
          return (
-             <View style={styles.container}>
-                <Text style={styles.welcome}>Welcome</Text>
+
+             <View style={[styles.container,{backgroundColor:this.state.bgColor}]}>
+                <Text style={styles.welcome}>Welcome!</Text>
                 <TextInput
                   style={styles.input}
                   onChangeText={(name) =>this.setState({name})}
@@ -115,6 +160,12 @@
                 />
                 <TouchableOpacity style={styles.btn} onPress={this.login}>
                   <Text style={{color:"#fff"}}> Login </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
+                  <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
+                  <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor2 </Text>
                 </TouchableOpacity>
             </View>
          );
@@ -266,6 +317,17 @@
          borderRadius: 5
      },
      btn: {
+         alignItems: 'center',
+         backgroundColor: '#1ab394',
+         padding: 10,
+         width: 300,
+         height: 45,
+         borderColor: '#1ab394',
+         borderWidth: 1,
+         margin: 10,
+         borderRadius: 5
+     },
+     btnCallApi: {
          alignItems: 'center',
          backgroundColor: '#1ab394',
          padding: 10,
