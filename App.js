@@ -44,6 +44,7 @@
             color:"#ffffff"
          }
      };
+
      constructor(props) {
          super(props);
          this.state = {
@@ -63,7 +64,7 @@
                  mandatoryContinueButtonLabel: '更新',
              },
              mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
-             deploymentKey: 'HTlsRB0M4-Cgn6kPwI1uPgJkzmjA7e08c8ff-8086-4007-9973-b6e7cc408ac4',
+             // deploymentKey: 'D_cFC_2V-E_18nHpZxj7I-kbPC0zryQPBZQtN',
          });
      }
 
@@ -101,7 +102,7 @@
      render() {
          return (
              <View style={styles.container}>
-                <Text style={styles.welcome}>Welcome!</Text>
+                <Text style={styles.welcome}>Welcome</Text>
                 <TextInput
                   style={styles.input}
                   onChangeText={(name) =>this.setState({name})}
