@@ -109,7 +109,8 @@
           // .then((response) => response.json())
           .then((result) => {
             console.log("bgColor1="+JSON.stringify(result._bodyInit))
-            let bgColor1=JSON.stringify(result._bodyInit)
+            let bgColor1=result._bodyInit
+            console.log('bgColor1='+bgColor1)
             this.setState({
               bgColor:bgColor1
             }, function(){
@@ -131,7 +132,8 @@
           .then((result) => {
 
             console.log("bgColor2="+JSON.stringify(result._bodyInit))
-            let bgColor2=JSON.stringify(result._bodyInit)
+            let bgColor2=result._bodyInit
+            console.log('bgColor2='+bgColor2)
             this.setState({
               bgColor:bgColor2
             }, function(){
