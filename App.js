@@ -166,12 +166,12 @@
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                       <Text style={{color:"#fff"}}> Login </Text>
                     </TouchableOpacity>
-                    {/*<TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
+                    <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor2 </Text>
-                    </TouchableOpacity>*/}
+                    </TouchableOpacity>
                 </View>
             </View>
          );
@@ -278,7 +278,7 @@
          render() {
                  return (
                     <View style={styles.profileContainer}>
-                        {/*<View style={styles.topBar}>
+                        <View style={styles.topBar}>
                             <TouchableOpacity 
                                 style={styles.topBarBtn}
                                 onPress={()=>{
@@ -298,7 +298,7 @@
                             >
                                 <Text style={styles.btnText}>Store List</Text>
                             </TouchableOpacity>
-                        </View>*/}
+                        </View>
                         <FlatList
                             contentContainerStyle={{backgroundColor:"#eee"}}
                             data = {this.state.showList === "userList"?this.state.userList:this.state.storeList}
