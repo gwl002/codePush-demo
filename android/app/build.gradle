@@ -113,6 +113,8 @@ android {
             include "armeabi-v7a", "x86", "arm64-v8a"
         }
     }
+    signingConfigs {
+    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
