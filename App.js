@@ -89,11 +89,7 @@
         .then((res) => {
             this.setState({isLoading:false})
             console.log('res='+JSON.stringify(res))
-            res.json()
-        })
-        .then(function(res){
-
-            if(res.status_code==0){
+            if(res._bodyInit.status_code==0){
                 _this.props.navigation.navigate('Profile', {
                     'userId': res.result.userId
                 })
@@ -107,7 +103,8 @@
                   { cancelable: false }
                 )
             }
-        }).catch((error) =>{
+        })
+       .catch((error) =>{
             this.setState({isLoading:false})
             console.error('error='+error);
           });
