@@ -28,6 +28,7 @@
      createAppContainer
  } from 'react-navigation';
  import codePush from "react-native-code-push";
+ import Loading from './Loading'
 
  type Props = {};
 
@@ -52,7 +53,8 @@
              bgColor:'#F5FCFF',
              name: '',
              password: "",
-             list: [1, 2, 3, 4]
+             list: [1, 2, 3, 4],
+             isLoading:false,
          }
      }
 
@@ -71,6 +73,7 @@
      }
 
      login = () => {
+        this.setState({isLoading:true})
         var _this = this;
         fetch('https://api-gateway-zhcpteam4.azure-api.net/user/serviceA/login/admin', {
             method: 'POST',
@@ -83,8 +86,13 @@
                 'pw': _this.state.password,
             }),
         })
-        .then(res => res.json())
+        .then((res) => {
+            this.setState({isLoading:false})
+            console.log('res='+JSON.stringify(res))
+            res.json()
+        })
         .then(function(res){
+
             if(res.status_code==0){
                 _this.props.navigation.navigate('Profile', {
                     'userId': res.result.userId
@@ -99,17 +107,20 @@
                   { cancelable: false }
                 )
             }
-        })
+        }).catch((error) =>{
+            this.setState({isLoading:false})
+            console.error('error='+error);
+          });
      }
 
      changeToFirstBgcolor=()=>{
+        this.setState({isLoading:true})
         // 点击按钮call API返回一个字符串，设置为页面背景颜色1
         return fetch('https://partsunlimited-api-vjyn4qb4solrw.azurewebsites.net/api/demo')
           // .then((response) => response.json())
           .then((result) => {
-            console.log("bgColor1="+JSON.stringify(result._bodyInit))
+            this.setState({isLoading:false})
             let bgColor1=result._bodyInit
-            console.log('bgColor1='+bgColor1)
             this.setState({
               bgColor:bgColor1
             }, function(){
@@ -118,6 +129,7 @@
 
           })
           .catch((error) =>{
+            this.setState({isLoading:false})
             console.error(error);
           });
          // Linking.openURL("https://partsunlimited-api-vjyn4qb4solrw.azurewebsites.net/api/demo")
@@ -125,14 +137,13 @@
 
 
      changeToSecondBgcolor=()=>{
+        this.setState({isLoading:true})
         // 点击按钮call API返回一个字符串，设置为页面背景颜色2
         return fetch('https://partsunlimited-api-cf3oys6viwkao.azurewebsites.net/api/demo')
           // .then((response) => response.json())
           .then((result) => {
-
-            console.log("bgColor2="+JSON.stringify(result._bodyInit))
+            this.setState({isLoading:false})
             let bgColor2=result._bodyInit
-            console.log('bgColor2='+bgColor2)
             this.setState({
               bgColor:bgColor2
             }, function(){
@@ -141,6 +152,7 @@
 
           })
           .catch((error) =>{
+            this.setState({isLoading:false})
             console.error(error);
           });
      }
@@ -149,6 +161,7 @@
          return (
 
              <View style={{flex:1}}>
+            {this.state.isLoading? <Loading size="large" color="#00f" />:null}
                 <View style={[styles.container,{backgroundColor:this.state.bgColor}]}>
                     <Text style={styles.welcome}>Welcome!</Text>
                     <TextInput
