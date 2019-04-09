@@ -185,6 +185,9 @@
                     <TouchableOpacity style={styles.btn} onPress={()=>{}}>
                       <Text style={{color:"#fff"}}> Azure devOps automated release test! </Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.btn}>
+                        <Text>Test Test Test</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
          );
