@@ -176,6 +176,7 @@
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                       <Text style={{color:"#fff"}}> Login </Text>
                     </TouchableOpacity>
+                    <Text>Test test Test test Test test Test test Test test</Text>
                     {/*<TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
