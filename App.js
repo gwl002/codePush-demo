@@ -179,6 +179,7 @@
                     <Text>Test test Test test Test test Test test Test test more test</Text>
                     <Text>Test test Test test Test test Test test Test test xxxxxx test</Text>
                     <Text>Test test Test test Test test Test test Test test xxxxxx test</Text>
+                    <Text>Test test Test test Test test Test test Test test xxxxxx test</Text>
                     {/*<TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
