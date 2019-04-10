@@ -176,11 +176,7 @@
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                       <Text style={{color:"#fff"}}> Login </Text>
                     </TouchableOpacity>
-                    <Text>Test test Test test Test test Test test Test test more test</Text>
-                    <Text>Test test Test test Test test Test test Test test xxxxxx test</Text>
-                    <Text>Test test Test test Test test Test test Test test xxxxxx test</Text>
-                    <Text>Test test Test test Test test Test test Test test xxxxxx test</Text>
-                    {/*<TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
+                    <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
@@ -190,8 +186,8 @@
                       <Text style={{color:"#fff"}}> Azure devOps automated release test! </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn}>
-                        <Text>Test Test Test</Text>
-                    </TouchableOpacity>*/}
+                        <Text>test</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
          );
