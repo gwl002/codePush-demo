@@ -160,7 +160,7 @@
              <View style={{flex:1}}>
             {this.state.isLoading? <Loading size="large" color="#00f" />:null}
                 <View style={[styles.container,{backgroundColor:this.state.bgColor}]}>
-                    <Text style={styles.welcome}>Welcome!</Text>
+                    <Text style={styles.welcome}>Welcome 1234!</Text>
                     <TextInput
                       style={styles.input}
                       onChangeText={(name) =>this.setState({name})}
