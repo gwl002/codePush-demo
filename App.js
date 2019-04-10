@@ -85,11 +85,11 @@
                 'userName': _this.state.name,
                 'pw': _this.state.password,
             }),
-        })
+        }).then(res=>res.json())
         .then((res) => {
             this.setState({isLoading:false})
             console.log('res='+JSON.stringify(res))
-            if(res._bodyInit.status_code==0){
+            if(res.status_code==0){
                 _this.props.navigation.navigate('Profile', {
                     'userId': res.result.userId
                 })
@@ -113,7 +113,7 @@
      changeToFirstBgcolor=()=>{
         this.setState({isLoading:true})
         // 点击按钮call API返回一个字符串，设置为页面背景颜色1
-        return fetch('https://partsunlimited-api-vjyn4qb4solrw.azurewebsites.net/api/demo')
+        return fetch('https://api-gateway-zhcpteam4.azure-api.net/api_1/api/demo')
           // .then((response) => response.json())
           .then((result) => {
             this.setState({isLoading:false})
@@ -136,7 +136,7 @@
      changeToSecondBgcolor=()=>{
         this.setState({isLoading:true})
         // 点击按钮call API返回一个字符串，设置为页面背景颜色2
-        return fetch('https://partsunlimited-api-cf3oys6viwkao.azurewebsites.net/api/demo')
+        return fetch('https://api-gateway-zhcpteam4.azure-api.net/api_2/api/demo')
           // .then((response) => response.json())
           .then((result) => {
             this.setState({isLoading:false})
@@ -176,7 +176,7 @@
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                       <Text style={{color:"#fff"}}> Login </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
+                    {/*<TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
@@ -187,7 +187,7 @@
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn}>
                         <Text>Test Test Test</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
                 </View>
             </View>
          );
