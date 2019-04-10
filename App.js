@@ -176,7 +176,7 @@
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                       <Text style={{color:"#fff"}}> Login </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
+                    {/*<TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
@@ -187,7 +187,7 @@
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn}>
                         <Text>Test Test Test</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
                 </View>
             </View>
          );
