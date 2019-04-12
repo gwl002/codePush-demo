@@ -15,12 +15,9 @@
      Linking,
  } from 'react-native';
 
- import Loading from './Loading';
+import Loading from './Loading';
 
- import codePush from "react-native-code-push";
- import SplashScreen from 'react-native-splash-screen'
-
- export default class Login extends React.Component {
+export default class Login extends React.Component {
      static navigationOptions = {
          title: 'Login',
          headerStyle:{
@@ -46,18 +43,7 @@
      }
 
      componentDidMount() {
-         SplashScreen.hide();
-         codePush.sync({
-             updateDialog: {
-                 appendReleaseDescription: true,
-                 descriptionPrefix: '\n\n更新内容：\n',
-                 title: '更新',
-                 mandatoryUpdateMessage: '',
-                 mandatoryContinueButtonLabel: '更新',
-             },
-             mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
-             // deploymentKey: 'D_cFC_2V-E_18nHpZxj7I-kbPC0zryQPBZQtN',
-         });
+         
      }
 
      login = () => {
