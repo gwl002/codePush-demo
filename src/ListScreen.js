@@ -1,30 +1,22 @@
- /**
-  * Sample React Native App
-  * https://github.com/facebook/react-native
-  *
-  * @format
-  * @flow
-  * @lint-ignore-every XPLATJSCOPYRIGHT1
-  */
-  
- import React from 'react';
-
+ import React, {
+     Component
+ } from 'react';
  import {
-     createStackNavigator,
-     createBottomTabNavigator,
-     createAppContainer
- } from 'react-navigation';
-
-
+     Platform,
+     StyleSheet,
+     Text,
+     TextInput,
+     View,
+     Button,
+     TouchableOpacity,
+     Image,
+     Alert,
+     FlatList,
+     Linking,
+ } from 'react-native';
+import Loading from './Loading';
  
- 
-
- import LoginScreen from "./src/LoginScreen.js";
- import ListScreen from "./src/ListScreen.js";
- import BoardingScreen from "./src/BoardingScreen.js";
-
-
- class ProfileScreen extends React.Component {
+export default class ProfileScreen extends React.Component {
          static navigationOptions = ({navigation}) => {
             const params = navigation.state.params || {};
             return {
@@ -156,16 +148,102 @@
      }
  }
 
-  const App = createStackNavigator({
-     Boarding:{
-        screen: BoardingScreen
+  const styles = StyleSheet.create({
+     container: {
+         flex: 1,
+         justifyContent:"center",
+         alignItems:"center",
      },
-     Main: {
-         screen: LoginScreen
+     welcome: {
+         fontSize: 20,
+         textAlign: 'center',
+         margin: 10,
      },
-     Profile: {
-         screen: ListScreen
+     instructions: {
+         textAlign: 'center',
+         color: '#333333',
+         marginBottom: 5,
+     },
+     input: {
+         borderColor: 'gray',
+         borderWidth: 1,
+         width: 300,
+         margin: 10,
+         borderRadius: 5,
+         paddingLeft:10,
+         paddingVertical:Platform.OS === "ios"?10:0
+     },
+     btn: {
+         alignItems: 'center',
+         backgroundColor: '#1ab394',
+         padding: 10,
+         width: 300,
+         height: 45,
+         borderColor: '#1ab394',
+         borderWidth: 1,
+         marginVertical: 10,
+         borderRadius: 5
+     },
+     btnCallApi: {
+         alignItems: 'center',
+         backgroundColor: '#1ab394',
+         padding: 10,
+         width: 300,
+         height: 45,
+         borderColor: '#1ab394',
+         borderWidth: 1,
+         margin: 10,
+         borderRadius: 5
+     },
+     profileContainer:{
+        flex:1,
+        backgroundColor:"#eee"
+     },
+     topBar:{
+        flexDirection:"row",
+        justifyContent:"space-around",
+     },
+     topBarBtn:{
+        justifyContent:"center",
+        padding:10,
+        // margin:3,
+        alignItems: 'center',
+        backgroundColor: '#1ab394',
+        width: "46%",
+        height: 45,
+        borderColor: '#1ab394',
+        borderWidth: 1,
+        borderRadius:5,
+        margin:5,
+     },
+     storeItem:{
+        flexDirection:"row",
+        alignItems:"center",
+        marginLeft:20,
+        marginVertical:5,
+        backgroundColor:"#fff",
+     },
+     image:{
+        width:80,
+        height:80,
+        marginRight:20,
+     },
+     content:{
+        padding:15,
+        flex: 1,
+        flexDirection: 'row',
+        borderBottomColor:"#ccc",
+        borderBottomWidth:1,
+     },
+     pleft:{
+        marginLeft:15,
+        flex:1
+     },
+     wrap:{
+        flexWrap: 'wrap',
+     },
+     title:{
+        fontSize:18,
+        color:"#000000"
      },
  });
-
- export default createAppContainer(App);
