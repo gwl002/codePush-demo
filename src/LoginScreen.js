@@ -151,7 +151,7 @@ export default class Login extends React.Component {
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                       <Text style={{color:"#fff"}}> Login </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
+                   {/*<TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
@@ -159,10 +159,7 @@ export default class Login extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={()=>{}}>
                       <Text style={{color:"#fff"}}> Azure devOps automated release test! </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn}>
-                        <Text>test</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
                 </View>
             </View>
          );

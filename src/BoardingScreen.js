@@ -32,68 +32,89 @@ let {height: winHeight, width: winWidth} = Dimensions.get('window');
          super(props);
          this.state = {
             currProgress:0,
+            showProgressBar:false,
          };
+
+         this.syncImmediate = this.syncImmediate.bind(this);
+         this._immediateUpdate = this._immediateUpdate.bind(this);
      }
 
      componentDidMount(){
-        SplashScreen.hide();
+        console.log("did mounted");
+        this.syncImmediate();        
+     }
+
+     syncImmediate(){
+        CodePush.checkForUpdate().then(update=>{
+            SplashScreen.hide();
+            console.log("updated");
+            if(!update){
+                //goto main page
+                this.props.navigation.navigate("Main");
+            }else{
+                this.setState({
+                    showProgressBar:true
+                })
+                this._immediateUpdate();
+            }
+        }).catch(err=>{
+
+        })
+     }
+
+     _immediateUpdate(){
         CodePush.sync(
             {
-                updateDialog: {
-                    appendReleaseDescription: true,
-                    descriptionPrefix: '\n\n更新内容：\n',
-                    title: '更新',
-                    mandatoryUpdateMessage: '',
-                    mandatoryContinueButtonLabel: '更新',
-                },
-                mandatoryInstallMode: CodePush.InstallMode.IMMEDIATE,
+                // updateDialog: {
+                //     // appendReleaseDescription: true,
+                //     // descriptionPrefix: '\n\n更新内容：\n',
+                //     // title: '更新',
+                //     // mandatoryUpdateMessage: '',
+                //     // mandatoryContinueButtonLabel: '更新',
+                // },
+                // mandatoryInstallMode: CodePush.InstallMode.IMMEDIATE,
+                installMode: CodePush.InstallMode.IMMEDIATE,
                 // deploymentKey: 'D_cFC_2V-E_18nHpZxj7I-kbPC0zryQPBZQtN',
             },
             this.handleCodePushStatusChange.bind(this),
             this.handleCodePushProgressChange.bind(this)
         );
-        // let _this = this;
-        // this.timer = setInterval(function(){
-        //     if(_this.state.currProgress <1){
-        //         _this.setState({currProgress:_this.state.currProgress+0.1})
-        //     }else{
-        //         clearInterval(_this.timer)
-        //     }
-        // },500)
      }
 
-     handleCodePushProgressChange(syncStatus){
+     handleCodePushStatusChange(syncStatus){
+        let syncMessage;
         switch(syncStatus) {
             case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
-              this.syncMessage = 'Checking for update'
+              syncMessage = 'Checking for update'
               break;
             case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
-              this.syncMessage = 'Downloading package'
+              syncMessage = 'Downloading package'
               break;
             case CodePush.SyncStatus.AWAITING_USER_ACTION:
-              this.syncMessage = 'Awaiting user action'
+              syncMessage = 'Awaiting user action'
               break;
             case CodePush.SyncStatus.INSTALLING_UPDATE:
-              this.syncMessage = 'Installing update'
+              syncMessage = 'Installing update'
               break;
             case CodePush.SyncStatus.UP_TO_DATE:
-              this.syncMessage = 'App up to date.'
+              syncMessage = 'App up to date.'
               break;
             case CodePush.SyncStatus.UPDATE_IGNORED:
-              this.syncMessage = 'Update cancelled by user'
+              syncMessage = 'Update cancelled by user'
               break;
             case CodePush.SyncStatus.UPDATE_INSTALLED:
-              this.syncMessage = 'Update installed and will be applied on restart.'
-              Alert.alert("install completed");
+              syncMessage = 'Update installed and will be applied on restart.'
               break;
             case CodePush.SyncStatus.UNKNOWN_ERROR:
-              this.syncMessage = 'An unknown error occurred'
+              syncMessage = 'An unknown error occurred'
               break;
         }
+        this.setState({
+            syncMessage
+        })
      }
 
      handleCodePushProgressChange(progress){
-        console.log(this);
         let currProgress = parseFloat(progress.receivedBytes / progress.totalBytes).toFixed(2);
         this.setState({
             currProgress:currProgress
@@ -104,9 +125,12 @@ let {height: winHeight, width: winWidth} = Dimensions.get('window');
          return (
             <View style={{flex:1}}>
                 <Image source={{uri :'asset:/images/launch_screen.png'}} style={{width:"100%",height:"100%"}}/>
-                <View style={{position:"absolute",justifyContent:"center",alignItems:"center",width:winWidth,height:winHeight,backgroundColor:"transparent",}}>
-                    <Progress progress={this.state.currProgress} />
-                </View>
+                {this.state.showProgressBar &&
+                    <View style={{position:"absolute",justifyContent:"center",alignItems:"center",width:winWidth,height:winHeight,backgroundColor:"transparent",}}>
+                        <Progress progress={this.state.currProgress} />
+                        <Text>{this.state.syncMessage}</Text>
+                    </View>
+                }
             </View>
          );
      }
