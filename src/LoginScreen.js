@@ -203,7 +203,6 @@ export default class Login extends React.Component {
          return (
 
              <ScrollView style={{flex:1}}>
-            {this.state.isLoading? <Loading size="large" color="#00f" />:null}
                 <View style={[styles.container,{backgroundColor:this.state.bgColor}]}>
                     <Text style={styles.welcome}>Welcome 1234!</Text>
                     <Text style={styles.welcome}>Welcome 5678!</Text>
@@ -222,14 +221,14 @@ export default class Login extends React.Component {
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                       <Text style={{color:"#fff"}}> Login </Text>
                     </TouchableOpacity>
-                   <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
+                    <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor2 </Text>
                     </TouchableOpacity>
-                   <TouchableOpacity style={styles.btn} onPress={()=>{}}>
-                      <Text style={{color:"#fff"}}> Azure devOps automated release test! </Text>
+                    <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
+                      <Text style={{color:"#fff"}}> Finally successed!</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
