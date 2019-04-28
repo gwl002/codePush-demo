@@ -13,9 +13,16 @@
      Alert,
      FlatList,
      Linking,
+     ScrollView
  } from 'react-native';
 
 import Loading from './Loading';
+
+import { NativeModules } from 'react-native';
+
+const SplashScreen = NativeModules.SplashScreen;
+
+import CodePush from "react-native-code-push";
 
 export default class Login extends React.Component {
      static navigationOptions = {
@@ -42,8 +49,72 @@ export default class Login extends React.Component {
          }
      }
 
-     componentDidMount() {
-         
+     componentDidMount(){
+        CodePush.notifyAppReady();
+        this.syncImmediate();        
+     }
+
+     syncImmediate(){
+        CodePush.checkForUpdate().then(update=>{
+            if(!update){
+                SplashScreen.hide();
+            }else{
+                SplashScreen.showProgressBar();
+                this._immediateUpdate();
+            }
+        }).catch(err=>{
+
+        })
+        
+     }
+
+     _immediateUpdate(){
+        CodePush.sync(
+            {
+                updateDialog:null,
+                installMode: CodePush.InstallMode.IMMEDIATE,
+            },
+            this.handleCodePushStatusChange.bind(this),
+            this.handleCodePushProgressChange.bind(this)
+        );
+     }
+
+     handleCodePushStatusChange(syncStatus){
+        let syncMessage;
+            switch(syncStatus) {
+                case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
+                  syncMessage = 'Checking for update'
+                  break;
+                case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
+                  syncMessage = 'Downloading package'
+                  break;
+                case CodePush.SyncStatus.AWAITING_USER_ACTION:
+                  syncMessage = 'Awaiting user action'
+                  break;
+                case CodePush.SyncStatus.INSTALLING_UPDATE:
+                  syncMessage = 'Installing update'
+                  break;
+                case CodePush.SyncStatus.UP_TO_DATE:
+                  syncMessage = 'App up to date.'
+                  break;
+                case CodePush.SyncStatus.UPDATE_IGNORED:
+                  syncMessage = 'Update cancelled by user'
+                  break;
+                case CodePush.SyncStatus.UPDATE_INSTALLED:
+                  syncMessage = 'Update installed and will be applied on restart.'
+                  break;
+                case CodePush.SyncStatus.UNKNOWN_ERROR:
+                  syncMessage = 'An unknown error occurred'
+                  break;
+            this.setState({
+                syncMessage
+            })
+        }
+     }
+
+     handleCodePushProgressChange(progress){
+        let currProgress = parseFloat(progress.receivedBytes / progress.totalBytes*100);
+        SplashScreen.setProgress(currProgress);
      }
 
      login = () => {
@@ -131,7 +202,7 @@ export default class Login extends React.Component {
      render() {
          return (
 
-             <View style={{flex:1}}>
+             <ScrollView style={{flex:1}}>
             {this.state.isLoading? <Loading size="large" color="#00f" />:null}
                 <View style={[styles.container,{backgroundColor:this.state.bgColor}]}>
                     <Text style={styles.welcome}>Welcome 1234!</Text>
@@ -151,17 +222,17 @@ export default class Login extends React.Component {
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                       <Text style={{color:"#fff"}}> Login </Text>
                     </TouchableOpacity>
-                   {/*<TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
+                   <TouchableOpacity style={styles.btn} onPress={this.changeToFirstBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor1 </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={this.changeToSecondBgcolor}>
                       <Text style={{color:"#fff"}}> ChangeBgcolorToBgcolor2 </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn} onPress={()=>{}}>
+                   <TouchableOpacity style={styles.btn} onPress={()=>{}}>
                       <Text style={{color:"#fff"}}> Azure devOps automated release test! </Text>
-                    </TouchableOpacity>*/}
+                    </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
          );
      }
  }

@@ -2,7 +2,6 @@ package com.myapp;
 
 import com.facebook.react.ReactActivity;
 import com.microsoft.codepush.react.CodePush;
-import org.devio.rn.splashscreen.SplashScreen;
 import android.os.Bundle;
 
 public class MainActivity extends ReactActivity {
